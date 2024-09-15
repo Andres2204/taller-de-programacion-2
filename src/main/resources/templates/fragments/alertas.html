@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div th:fragment="simple (msg)"  class="alert alert-primary " role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+
+    <div th:fragment="secondary (msg)" class="alert alert-secondary" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+
+    <div th:fragment="success (msg)" class="alert alert-success" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+
+    <div th:fragment="danger (msg)" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p th:text="${msg}"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div th:fragment="warning (msg)" class="alert alert-warning" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+    <div th:fragment="info (msg)" class="alert alert-info" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+    <div th:fragment="light (msg)" class="alert alert-light" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+    <div th:fragment="dark (msg)" class="alert alert-dark" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
