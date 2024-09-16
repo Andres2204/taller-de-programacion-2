@@ -15,23 +15,23 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    public Long Id;
 
     @NotEmpty(message = "{NotEmpty.cliente.Nombre}") //que es requerido u obligatorio
-    private String Nombre;
+    public String Nombre;
 
     @NotEmpty(message = "{NotEmpty.cliente.Apellido}")
     @Size(min=4, max=15, message = "{Size.cliente.Apellido}")
-    private String Apellido;
+    public String Apellido;
 
     @NotEmpty(message = "{NotEmpty.cliente.Email}")
     @Email(message = "{Email.cliente.Email}")
-    private String Email;
+    public String Email;
 
     @NotNull //valida que la fecha no sea nula
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
-    private Date CreateAt;
+    public Date CreateAt;
 
     
 
