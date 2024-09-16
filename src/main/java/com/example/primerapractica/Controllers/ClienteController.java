@@ -30,6 +30,7 @@ public class ClienteController {
     @GetMapping("/nuevo")
     public String crear(Model model) { // crear un nuevo cliente
         Cliente cliente = new Cliente();
+        
 
         model.addAttribute("titulo", "Formulario de Cliente");
         model.addAttribute("cliente", cliente);
@@ -38,24 +39,26 @@ public class ClienteController {
     }
 
     @PostMapping("/validar/{returnPage}") // <- posible metodo de enumerar clientes!
-    //para validar se agrega el valid y el bindingResul, estos siempre deben estar juntos uno tras otro
-    public String validarCliente(@Valid Cliente cliente, BindingResult result, @PathVariable String returnPage, Model model) {
+    // para validar se agrega el valid y el bindingResul, estos siempre deben estar
+    // juntos uno tras otro
+    public String validarCliente(@Valid Cliente cliente, BindingResult result, @PathVariable String returnPage,
+            Model model) {
 
-        if (result.hasErrors()) {
-            model.addAttribute("titulo", "Formulario de Cliente ********");
-            model.addAttribute("err", result.getAllErrors());
-            return returnPage;
-        }
+                if (result.hasErrors()) {
+                    model.addAttribute("titulo", "Formulario de Cliente");         
+                    model.addAttribute("err", result.getModel());
+                    return returnPage;
+                }
 
         clienteDao.Save(cliente);
-        //Status.setComplete();
         return "redirect:/clientes";
     }
 
-    @GetMapping("/editar/{id}") //editar un cliente existente
+    @GetMapping("/editar/{id}") // editar un cliente existente
     public String Editar(@PathVariable Long id, Model model) {
         // verificar que la ide sea valida
-        if (id <= 0) return "redirect:/listar";
+        if (id <= 0)
+            return "redirect:/listar";
 
         // encontrar cliente para enviar datos a editar
         Cliente cliente = clienteDao.findOne(id);
@@ -74,5 +77,3 @@ public class ClienteController {
     }
 
 }
-
-

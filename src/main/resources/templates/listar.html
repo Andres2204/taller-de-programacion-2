@@ -22,16 +22,15 @@
         <div class="inner">
             <h3 class="masthead-brand">Clientes</h3>
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link" href="">Home</a>
-                <a class="nav-link" href="">Features</a>
-                <a class="nav-link" href="">Contact</a>
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/productos">Productos</a>
                 <a class="nav-link active" href="/clientes">Clients</a>
             </nav>
         </div>
     </header>
 
     <main role="main" class="inner cover">
-        <div th:replace="fragments/alertas :: danger (msg='¡Warning!')"></div>
+       <!--  <div th:replace="fragments/alertas :: danger (msg='¡Warning!')"></div> -->
         <h1 class="text-primary border border-success border-bottom  border-0 text-light" th:text="${titulo}"></h1>
         <table class="table table-striped">
             <thead>

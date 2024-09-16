@@ -43,7 +43,7 @@ body {
 }
 
 .cover-container {
-  max-width: 42em;
+  max-width: 100%;
 }
 
 
@@ -51,6 +51,7 @@ body {
  * Header
  */
 .masthead {
+
   margin-bottom: 2rem;
 }
 

@@ -38,9 +38,9 @@ public class ClienteDaoImp implements IClienteDao {
         else{ // crear nuevo
 
             System.out.println("\n\n\n no encontrad - Crear \n\n\n");
+            
             em.merge(cliente);
-
-            em.persist(cliente);
+           //em.persist(cliente);
         }
 
     }

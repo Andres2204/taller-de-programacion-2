@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,15 +17,15 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @NotEmpty //que es requerido u obligatorio
+    @NotEmpty(message = "{NotEmpty.cliente.Nombre}") //que es requerido u obligatorio
     private String Nombre;
 
-    @NotEmpty
-    @Size(min=4, max=15)
+    @NotEmpty(message = "{NotEmpty.cliente.Apellido}")
+    @Size(min=4, max=15, message = "{Size.cliente.Apellido}")
     private String Apellido;
 
-    @NotEmpty
-    @Email
+    @NotEmpty(message = "{NotEmpty.cliente.Email}")
+    @Email(message = "{Email.cliente.Email}")
     private String Email;
 
     @NotNull //valida que la fecha no sea nula
@@ -34,8 +33,14 @@ public class Cliente implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date CreateAt;
 
+    
+
+    public Cliente() {
+        perPersist();
+    }
+
     @PrePersist
-    public void perPersist(){
+    private void perPersist(){
 
         CreateAt = new Date();
     }
