@@ -44,7 +44,7 @@ public class ProductoController {
 
         if (result.hasErrors()) {
             model.addAttribute("titulo", "Formulario de producto ********");
-            model.addAttribute("err", result.getAllErrors());
+            model.addAttribute("err", result.getModel());
             return returnPage;
         }
 

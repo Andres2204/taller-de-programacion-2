@@ -13,17 +13,21 @@ public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
-    @NotEmpty
+    private Long Id;
+
+    @NotEmpty(message = "{NotEmpty.producto.Nombre}") 
     private String Nombre;
-    @NotEmpty
+
+    @NotEmpty(message = "{NotEmpty.producto.Descripcion}") 
     private String Descripcion;
     
-    @NotEmpty
-    @Positive
+    @NotEmpty(message = "{NotEmpty.producto.ValorUnitario}") 
+    @Positive(message = "{Positive.producto.ValorUnitario}") 
     private int ValorUnitario;
-    @NotEmpty
-    @PositiveOrZero
+    
+    
+    @NotEmpty(message = "{NotEmpty.producto.Stock}")
+    @PositiveOrZero(message = "{PositiveOrZero.producto.Stock}")
     private int Stock;
 
     public Producto() {
@@ -37,7 +41,7 @@ public class Producto implements Serializable {
         Stock = stock;
     }
 
-    public long getId() {
+    public Long getId() {
         return Id;
     }
 
