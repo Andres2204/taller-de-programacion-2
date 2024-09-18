@@ -1,6 +1,4 @@
 package com.example.primerapractica.Models.DAO;
-
-import com.example.primerapractica.Models.Entity.Cliente;
 import com.example.primerapractica.Models.Entity.Producto;
 
 import jakarta.persistence.EntityManager;

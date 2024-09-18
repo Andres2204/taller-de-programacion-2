@@ -57,7 +57,7 @@
 
         <div class="card shadow-sm">
             <div class="card-body">
-                <form th:action="@{/productos/validar/nuevo}" th:object="${producto}" method="post">
+                <form th:action="@{/productos/validar/nuevoProd}" th:object="${producto}" method="post">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
