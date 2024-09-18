@@ -21,7 +21,7 @@ public class ProductoDaoImp implements IProductoDao {
     @Transactional(readOnly = true)
     @Override
     public List<Producto> findAll() {
-        return em.createQuery("from Productos").getResultList();
+        return em.createQuery("from Producto").getResultList();
     }
 
     @Transactional

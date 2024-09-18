@@ -2,6 +2,7 @@ package com.example.primerapractica.Models.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -21,12 +22,12 @@ public class Producto implements Serializable {
     @NotEmpty(message = "{NotEmpty.producto.Descripcion}") 
     private String Descripcion;
     
-    @NotEmpty(message = "{NotEmpty.producto.ValorUnitario}") 
+    @NotNull(message = "{NotEmpty.producto.ValorUnitario}") 
     @Positive(message = "{Positive.producto.ValorUnitario}") 
     private int ValorUnitario;
     
     
-    @NotEmpty(message = "{NotEmpty.producto.Stock}")
+    @NotNull(message = "{NotEmpty.producto.Stock}")
     @PositiveOrZero(message = "{PositiveOrZero.producto.Stock}")
     private int Stock;
 
