@@ -2,6 +2,7 @@ package com.example.primerapractica.Models.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -13,17 +14,21 @@ public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
-    @NotEmpty
+    private Long Id;
+
+    @NotEmpty(message = "{NotEmpty.producto.Nombre}") 
     private String Nombre;
-    @NotEmpty
+
+    @NotEmpty(message = "{NotEmpty.producto.Descripcion}") 
     private String Descripcion;
     
-    @NotEmpty
-    @Positive
+    @NotNull(message = "{NotEmpty.producto.ValorUnitario}") 
+    @Positive(message = "{Positive.producto.ValorUnitario}") 
     private int ValorUnitario;
-    @NotEmpty
-    @PositiveOrZero
+    
+    
+    @NotNull(message = "{NotEmpty.producto.Stock}")
+    @PositiveOrZero(message = "{PositiveOrZero.producto.Stock}")
     private int Stock;
 
     public Producto() {
@@ -37,7 +42,7 @@ public class Producto implements Serializable {
         Stock = stock;
     }
 
-    public long getId() {
+    public Long getId() {
         return Id;
     }
 

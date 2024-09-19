@@ -22,29 +22,29 @@ public class ProductoController {
 
     @GetMapping("")
     public String Listar(Model model) {
-        model.addAttribute("titulo", "Clientes encontrados.");
+        model.addAttribute("titulo", "Productos encontrados.");
         model.addAttribute("producto", productoDao.findAll());
 
-        return "listar";
+        return "listarProd";
     }
 
     @GetMapping("/nuevo")
-    public String crear(Model model) { // crear un nuevo cliente
+    public String crear(Model model) { // crear un nuevo producto
         Producto producto = new Producto();
 
-        model.addAttribute("titulo", "Formulario de Cliente");
+        model.addAttribute("titulo", "Formulario de Producto");
         model.addAttribute("producto", producto);
 
-        return "nuevo";
+        return "nuevoProd";
     }
 
-    @PostMapping("/validar/{returnPage}") // <- posible metodo de enumerar clientes!
+    @PostMapping("/validar/{returnPage}") // <- posible metodo de enumerar Productos!
     //para validar se agrega el valid y el bindingResul, estos siempre deben estar juntos uno tras otro
     public String validarCliente(@Valid Producto producto, BindingResult result, @PathVariable String returnPage, Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("titulo", "Formulario de producto ********");
-            model.addAttribute("err", result.getAllErrors());
+            model.addAttribute("titulo", "Formulario de Producto");
+            model.addAttribute("err", result.getModel());
             return returnPage;
         }
 
@@ -53,17 +53,17 @@ public class ProductoController {
         return "redirect:/productos";
     }
 
-    @GetMapping("/editar/{id}") //editar un cliente existente
+    @GetMapping("/editar/{id}") //editar un Producto existente
     public String Editar(@PathVariable Long id, Model model) {
         // verificar que la ide sea valida
-        if (id <= 0) return "redirect:/listar";
+        if (id <= 0) return "redirect:/listarProd";
 
         // encontrar cliente para enviar datos a editar
         Producto producto = productoDao.findOne(id);
-        model.addAttribute("cliente", producto);
-        model.addAttribute("titulo", "Editar Cliente");
+        model.addAttribute("producto", producto);
+        model.addAttribute("titulo", "Editar Producto");
 
-        return "edit";
+        return "editarProd";
     }
 
     @GetMapping("/eliminar/{id}")
