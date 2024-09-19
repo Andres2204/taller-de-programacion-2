@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,6 @@ public class ClienteController {
     public String crear(Model model) { // crear un nuevo cliente
         Cliente cliente = new Cliente();
 
-
         model.addAttribute("titulo", "Formulario de Cliente");
         model.addAttribute("cliente", cliente);
 
@@ -50,9 +46,9 @@ public class ClienteController {
         model.addAttribute("titulo", "Formulario de Cliente");
 
         List<GenericFormField> fields = new ArrayList<>();
-        fields.add(new GenericFormField("Nombre", "Nombre", "text", true));
-        fields.add(new GenericFormField("Apellido", "Apellido", "text", true));
-        fields.add(new GenericFormField("Email", "Email", "email", true));
+        fields.add(new GenericFormField("nombre", "Nombre", "text", true));
+        fields.add(new GenericFormField("apellido", "Apellido", "text", true));
+        fields.add(new GenericFormField("email", "Email", "email", true));
 
         GenericForm form = new GenericForm("/clientes/validarGenerado/genericForm", fields);
         form.setValidationUrl("/clientes/validarGenerado/returnPage");

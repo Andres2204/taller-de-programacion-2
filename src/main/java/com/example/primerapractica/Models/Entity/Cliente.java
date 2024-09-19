@@ -41,7 +41,6 @@ public class Cliente implements Serializable {
 
     @PrePersist
     private void perPersist(){
-
         CreateAt = new Date();
     }
 

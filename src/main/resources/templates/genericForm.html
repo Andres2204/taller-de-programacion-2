@@ -27,9 +27,10 @@
     <form action="#" th:action="@{${dynamicForm.returnUrl}}" th:object="${dynamicForm.obj}" method="post">
         <div th:each="field, fieldStat : ${dynamicForm.fields}">
             <label th:for="${field.name}" th:text="${field.label}"></label>
-            <input th:field="*{__${fieldStat.current.name}__}"
+            <input th:name="${field.name}"
                    th:type="${field.type}"
-                   th:id="${field.name}"/>
+                   th:id="${field.name}"
+                   th:text="${__${fieldStat.current.name}__}"/>
         </div>
         <button type="submit">Enviar</button>
     </form>
