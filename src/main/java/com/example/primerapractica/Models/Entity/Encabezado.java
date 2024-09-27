@@ -24,7 +24,7 @@ public class Encabezado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     private Cliente cliente;
@@ -56,13 +56,7 @@ public class Encabezado implements Serializable {
         fecha = new Date();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+  
 
     public Date getFecha() {
         return fecha;
@@ -102,6 +96,16 @@ public class Encabezado implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

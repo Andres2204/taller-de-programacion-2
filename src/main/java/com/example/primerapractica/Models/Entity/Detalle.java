@@ -13,29 +13,30 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+
 @Entity
-@Table(name="detalles")
+@Table(name = "detalles")
 public class Detalle implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    
+    private Long id;
+
     @ManyToOne
     private Encabezado encabezado;
-    
+
     @ManyToOne
     private Producto producto;
 
-    @NotNull(message = "{NotEmpty.Detalle.cantidad}") 
+    @NotNull(message = "{NotEmpty.Detalle.cantidad}")
     @PositiveOrZero(message = "{PositiveOrZero.Detalle.cantidad}")
     private int cantidad;
-    
-    @NotNull(message = "{NotEmpty.Detalle.valor}") 
-    @Positive(message = "{Positive.Detalle.valor}") 
+
+    @NotNull(message = "{NotEmpty.Detalle.valor}")
+    @Positive(message = "{Positive.Detalle.valor}")
     private double valor;
-    
-    @NotNull(message = "{NotEmpty.Detalle.descuento}") 
+
+    @NotNull(message = "{NotEmpty.Detalle.descuento}")
     @PositiveOrZero(message = "{PositiveOrZero.Detalle.descuento}")
     private double descuento;
 
@@ -56,14 +57,6 @@ public class Detalle implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public int getCantidad() {
@@ -88,6 +81,14 @@ public class Detalle implements Serializable {
 
     public void setDescuento(double descuento) {
         this.descuento = descuento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

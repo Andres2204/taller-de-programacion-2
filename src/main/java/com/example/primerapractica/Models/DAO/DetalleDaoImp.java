@@ -1,13 +1,9 @@
 package com.example.primerapractica.Models.DAO;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.example.primerapractica.Models.Entity.Cliente;
 import com.example.primerapractica.Models.Entity.Detalle;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 

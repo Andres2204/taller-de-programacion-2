@@ -1,11 +1,8 @@
 package com.example.primerapractica.Models.DAO;
 
 import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import com.example.primerapractica.Models.Entity.Encabezado;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -18,29 +15,40 @@ public class EncabezadoDaoImp implements EncabezadoDAO {
     @Transactional(readOnly = true)
     @Override
     public List<Encabezado> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return em.createQuery("from Encabezado").getResultList();
     }
 
     @Transactional
     @Override
     public void Save(Encabezado encabezado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Save'");
+        System.out.println(encabezado.toString());
+
+        // actualiza
+        if(encabezado.getId() != null && encabezado.getId()>0){
+
+            System.out.println("\n\n\n ENCONTRADO - ACTUALIZAR \n\n\n");
+            em.merge(encabezado);
+        }
+        else{ // crear nuevo
+
+            System.out.println("\n\n\n no encontrad - Crear \n\n\n");
+            
+            em.merge(encabezado);
+           
+        }
     }
 
     @Transactional(readOnly = true)
     @Override
     public Encabezado findOne(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findOne'");
+       return em.find(Encabezado.class, id);
     }
 
        @Transactional
     @Override
     public void Delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Delete'");
+        Encabezado encabezado=findOne(id);
+        em.remove(encabezado);
     }
     
 }
