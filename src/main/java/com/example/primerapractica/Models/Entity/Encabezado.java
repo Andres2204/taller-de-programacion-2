@@ -1,62 +1,59 @@
 package com.example.primerapractica.Models.Entity;
 
-import java.sql.Date;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 
 @Entity
-@Table(name="encabezado")
-@EntityListeners(AuditingEntityListener.class)
-public class Encabezado {
+@Table(name = "encabezado")
+public class Encabezado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne
     private Cliente cliente;
 
-    @CreatedDate
-    @Column(name = "fecha_creacion", updatable = false)
+    @NotNull // valida que la fecha no sea nula
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
     private Date fecha;
 
-    @NotNull(message = "{NotEmpty.encabezado.subtotal}") 
-    @Positive(message = "{Positive.encabezado.subtotal}") 
+    @NotNull(message = "{NotEmpty.encabezado.subtotal}")
+    @Positive(message = "{Positive.encabezado.subtotal}")
     private double subtotal;
 
-    @NotNull(message = "{NotEmpty.encabezado.subtotal}") 
-    @Positive(message = "{Positive.encabezado.total}") 
+    @NotNull(message = "{NotEmpty.encabezado.subtotal}")
+    @Positive(message = "{Positive.encabezado.total}")
     private double total;
 
-    @NotNull(message = "{NotEmpty.encabezado.subtotal}") 
-    @PositiveOrZero(message = "{PositiveOrZero.encabezado.descuentoTotal}") 
+    @NotNull(message = "{NotEmpty.encabezado.descuentoTotal}")
+    @PositiveOrZero(message = "{PositiveOrZero.encabezado.descuentoTotal}")
     private double descuentoTotal;
 
     public Encabezado() {
+        perPersist();
     }
 
-    public Encabezado(long id, Cliente cliente, Date fecha, double subtotal, double total, double descuentoTotal) {
-        this.id = id;
-        this.cliente = cliente;
-        this.fecha = fecha;
-        this.subtotal = subtotal;
-        this.total = total;
-        this.descuentoTotal = descuentoTotal;
+
+    @PrePersist
+    private void perPersist() {
+        fecha = new Date();
     }
 
     public long getId() {

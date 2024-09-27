@@ -7,16 +7,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
-
+import java.io.Serializable;
 @Entity
 @Table(name="detalles")
-public class Detalle {
+public class Detalle implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class Detalle {
     @ManyToOne
     private Encabezado encabezado;
     
-    @OneToOne
+    @ManyToOne
     private Producto producto;
 
     @NotNull(message = "{NotEmpty.Detalle.cantidad}") 
@@ -41,15 +40,6 @@ public class Detalle {
     private double descuento;
 
     public Detalle() {
-    }
-
-    public Detalle(long id, Encabezado encabezado, Producto producto, int cantidad, double valor, double descuento) {
-        this.id = id;
-        this.encabezado = encabezado;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.valor = valor;
-        this.descuento = descuento;
     }
 
     public Encabezado getEncabezado() {

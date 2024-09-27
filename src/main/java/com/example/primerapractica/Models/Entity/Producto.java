@@ -34,14 +34,6 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(long id, String nombre, String descripcion, int valorUnitario, int stock) {
-        Id = id;
-        Nombre = nombre;
-        Descripcion = descripcion;
-        ValorUnitario = valorUnitario;
-        Stock = stock;
-    }
-
     public Long getId() {
         return Id;
     }
