@@ -26,37 +26,45 @@ public class ClienteDaoImp implements IClienteDao {
     @Transactional
     @Override
     public void Save(Cliente cliente) {
-
-        System.out.println(cliente.toString());
-
-        // actualiza
-        if(cliente.getId() != null && cliente.getId()>0){
-
-            System.out.println("\n\n\n ENCONTRADO - ACTUALIZAR \n\n\n");
-            em.merge(cliente);
+        Cliente existingCliente = findByEmail(cliente.getEmail());
+    
+        if (existingCliente != null && (cliente.getId() == null || !existingCliente.getId().equals(cliente.getId()))) {
+            System.out.println("El correo electrónico ya está en uso. No se puede guardar el cliente.");
+            return; // Salir del método si el correo ya está en uso
         }
-        else{ // crear nuevo
-
-            System.out.println("\n\n\n no encontrad - Crear \n\n\n");
-            
+    
+        if (cliente.getId() != null && cliente.getId() > 0) {
             em.merge(cliente);
-           //em.persist(cliente);
+        } else {
+            em.persist(cliente);
         }
-
     }
+    
+
 
     @Transactional(readOnly = true)
     @Override
     public Cliente findOne(Long id) {
         return em.find(Cliente.class, id);
-       }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Cliente findByEmail(String email) {
+        try {
+            return (Cliente) em.createNativeQuery("SELECT * FROM clientes WHERE email = :email", Cliente.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null; // Si no se encuentra, se retorna null
+        }
+    }
 
     @Transactional
     @Override
     public void Delete(Long id) {
-        Cliente cliente=findOne(id);
+        Cliente cliente = findOne(id);
         em.remove(cliente);
     }
-    
 
 }

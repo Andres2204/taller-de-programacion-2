@@ -3,6 +3,8 @@ package com.example.primerapractica.Models.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,7 +28,11 @@ public class Cliente implements Serializable {
 
     @NotEmpty(message = "{NotEmpty.cliente.Email}")
     @Email(message = "{Email.cliente.Email}")
+    @Column(unique = true)
     public String Email;
+
+    @NotEmpty(message = "{password.cliente.password}")
+    public String password;
 
     @NotNull //valida que la fecha no sea nula
     @Column(name = "create_at")
@@ -71,6 +77,8 @@ public class Cliente implements Serializable {
         Nombre = nombre;
     }
 
+   
+
     public String getApellido() {
         return Apellido;
     }
@@ -85,6 +93,14 @@ public class Cliente implements Serializable {
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getCreateAt() {

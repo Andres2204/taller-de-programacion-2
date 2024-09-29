@@ -11,6 +11,8 @@ public interface IClienteDao {
     public void Save(Cliente cliente);
 
     public Cliente findOne (Long id);
-    
+
+    public Cliente findByEmail(String email);
+
     public void Delete(Long id);
 }

@@ -59,7 +59,6 @@ public class ClienteController {
         return "genericForm";
     }
 
-
     @PostMapping("/validar/{returnPage}") // <- posible metodo de enumerar clientes!
     // para validar se agrega el valid y el bindingResul, estos siempre deben estar
     // juntos uno tras otro
@@ -67,15 +66,19 @@ public class ClienteController {
             @Valid Cliente cliente,
             BindingResult result,
             @PathVariable String returnPage,
-            Model model
-    ) {
+            Model model) {
         System.out.println("\n[+] verificando cliente: " + cliente.toString() + "\n");
-        if (result.hasErrors()) {
-            model.addAttribute("titulo", "Formulario de Cliente");
+        if (result.hasErrors() || (clienteDao.findByEmail(cliente.getEmail()) != null)) {
+            if (clienteDao.findByEmail(cliente.getEmail()) != null) {
+                result.rejectValue("email", "error.cliente", "El correo electrónico ya está en uso.");
+                model.addAttribute("mensajeError", "El correo electrónico ya está en uso.");
+            } else
+                model.addAttribute("titulo", "Formulario de Cliente");
             model.addAttribute("err", result.getModel());
             return returnPage;
         }
         clienteDao.Save(cliente);
+
         return "redirect:/clientes";
     }
 
@@ -86,11 +89,9 @@ public class ClienteController {
             @Valid Cliente cliente,
             BindingResult result,
             @PathVariable String returnPage,
-            Model model
-    ) {
+            Model model) {
         System.out.println("\n[+] verificando cliente: " + cliente.toString() + "\n");
         System.out.println("\n[+] verificando res: " + result.toString() + "\n");
-
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -111,8 +112,6 @@ public class ClienteController {
         clienteDao.Save(cliente);
         return "redirect:/clientes";
     }
-
-
 
     @GetMapping("/editar/{id}") // editar un cliente existente
     public String Editar(@PathVariable Long id, Model model) {
