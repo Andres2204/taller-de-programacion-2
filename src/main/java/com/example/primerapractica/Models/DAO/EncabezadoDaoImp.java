@@ -23,7 +23,7 @@ public class EncabezadoDaoImp implements IEncabezadoDAO {
 
     @Transactional
     @Override
-    public void Save(Encabezado encabezado) {
+    public void save(Encabezado encabezado) {
         System.out.println(encabezado.toString());
 
         // actualiza
@@ -47,9 +47,9 @@ public class EncabezadoDaoImp implements IEncabezadoDAO {
        return em.find(Encabezado.class, id);
     }
 
-       @Transactional
+    @Transactional
     @Override
-    public void Delete(Long id) {
+    public void delete(Long id) {
         Encabezado encabezado=findOne(id);
         em.remove(encabezado);
     }

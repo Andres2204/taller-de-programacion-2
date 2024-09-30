@@ -30,7 +30,7 @@ public class DetalleDaoImp implements IDetalleDao {
 
     @Transactional
     @Override
-    public void Save(Detalle detalle) {
+    public void save(Detalle detalle) {
         System.out.println(detalle.toString());
 
         // actualiza
@@ -56,7 +56,7 @@ public class DetalleDaoImp implements IDetalleDao {
 
     @Transactional
     @Override
-    public void Delete(Long id) {
+    public void delete(Long id) {
         Detalle detalle=findOne(id);
         em.remove(detalle);
     }
