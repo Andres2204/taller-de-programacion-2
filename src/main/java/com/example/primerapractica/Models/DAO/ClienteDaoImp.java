@@ -26,18 +26,23 @@ public class ClienteDaoImp implements IClienteDao {
     @Transactional
     @Override
     public void Save(Cliente cliente) {
-        Cliente existingCliente = findByEmail(cliente.getEmail());
-    
-        if (existingCliente != null && (cliente.getId() == null || !existingCliente.getId().equals(cliente.getId()))) {
-            System.out.println("El correo electrónico ya está en uso. No se puede guardar el cliente.");
-            return; // Salir del método si el correo ya está en uso
-        }
-    
-        if (cliente.getId() != null && cliente.getId() > 0) {
+
+        System.out.println(cliente.toString());
+
+        // actualiza
+        if(cliente.getId() != null && cliente.getId()>0){
+
+            System.out.println("\n\n\n ENCONTRADO - ACTUALIZAR \n\n\n");
             em.merge(cliente);
-        } else {
-            em.persist(cliente);
         }
+        else{ // crear nuevo
+
+            System.out.println("\n\n\n no encontrad - Crear \n\n\n");
+            
+            em.merge(cliente);
+           //em.persist(cliente);
+        }
+
     }
     
 

@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
 import com.example.primerapractica.Models.DAO.IClienteDao;
 import com.example.primerapractica.Models.Entity.Cliente;
 
 import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping("/login")
@@ -26,17 +28,34 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping({ "/validar/{returnPage}" })
-    public String validarCliente(@Valid Cliente cliente,
+    @GetMapping("/registro")
+    public String registro(Model model) {
+
+        model.addAttribute("titulo", "Formulario de Registro");
+        model.addAttribute("cliente", new Cliente());
+        return "registro";
+    }
+
+     @PostMapping("/validar/{returnPage}") // <- posible metodo de enumerar clientes!
+    // para validar se agrega el valid y el bindingResul, estos siempre deben estar
+    // juntos uno tras otro
+    public String validarCliente(
+            @Valid Cliente cliente,
             BindingResult result,
             @PathVariable String returnPage,
             Model model) {
-           Cliente cliente2 = clienteDao.findByEmail(cliente.getEmail());
-               if(cliente2 != null && cliente2.getPassword().equals(cliente.getPassword())){
-                  System.out.println("Valido exitosamente");
-                  model.addAttribute("mensajeError", "El correo electrónico ya está en uso.");
-                  return "redirect:/";
-               }
-               return "redirect:/login";      
+        System.out.println("\n[+] verificando cliente: " + cliente.toString() + "\n");
+        if (result.hasErrors() || (clienteDao.findByEmail(cliente.getEmail()) != null)) {
+            if (clienteDao.findByEmail(cliente.getEmail()) != null) {
+                result.rejectValue("email", "error.cliente", "El correo electrónico ya está en uso.");
+                model.addAttribute("mensajeError", "El correo electrónico ya está en uso.");
+            } else
+                model.addAttribute("titulo", "Formulario de Cliente");
+            model.addAttribute("err", result.getModel());
+            return returnPage;
+        }
+        clienteDao.Save(cliente);
+
+        return "redirect:/login";
     }
 }
