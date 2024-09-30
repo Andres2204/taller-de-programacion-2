@@ -1,11 +1,14 @@
 package com.example.primerapractica.Models.DAO;
 
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.primerapractica.Models.Entity.Encabezado;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+@Repository
 public class EncabezadoDaoImp implements EncabezadoDAO {
 
  @PersistenceContext
@@ -20,7 +23,7 @@ public class EncabezadoDaoImp implements EncabezadoDAO {
 
     @Transactional
     @Override
-    public void Save(Encabezado encabezado) {
+    public void save(Encabezado encabezado) {
         System.out.println(encabezado.toString());
 
         // actualiza
@@ -44,9 +47,9 @@ public class EncabezadoDaoImp implements EncabezadoDAO {
        return em.find(Encabezado.class, id);
     }
 
-       @Transactional
+    @Transactional
     @Override
-    public void Delete(Long id) {
+    public void delete(Long id) {
         Encabezado encabezado=findOne(id);
         em.remove(encabezado);
     }

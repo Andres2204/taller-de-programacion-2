@@ -40,6 +40,14 @@ public class Detalle implements Serializable {
     public Detalle() {
     }
 
+    public Detalle(Encabezado encabezado, Producto producto, int cantidad, double valor, double descuento) {
+        this.encabezado = encabezado;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.valor = valor;
+        this.descuento = descuento;
+    }
+
     public Encabezado getEncabezado() {
         return encabezado;
     }

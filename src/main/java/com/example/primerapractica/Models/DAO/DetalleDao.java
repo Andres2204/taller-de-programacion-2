@@ -7,11 +7,11 @@ public interface DetalleDao {
 
  public List<Detalle> findAll();
 
-    public void Save(Detalle detalle);
+    public void save(Detalle detalle);
 
     public Detalle findOne (Long id);
 
-    public void Delete(Long id);
+    public void delete(Long id);
     
 
 
