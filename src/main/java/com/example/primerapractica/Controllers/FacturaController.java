@@ -23,6 +23,9 @@ import java.util.List;
 @RequestMapping("/factura")
 public class FacturaController {
 
+    /**
+     *
+     */
     @Autowired
     private IEncabezadoDAO encabezadoDao;
 
@@ -47,5 +50,5 @@ public class FacturaController {
         model.addAttribute("detalles",detalles);
         return "factura";
     }
-    
+
 }

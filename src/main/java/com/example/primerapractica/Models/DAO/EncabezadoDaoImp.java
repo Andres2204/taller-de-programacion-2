@@ -1,12 +1,15 @@
 package com.example.primerapractica.Models.DAO;
 
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.primerapractica.Models.Entity.Encabezado;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-public class EncabezadoDaoImp implements EncabezadoDAO {
+@Repository
+public class EncabezadoDaoImp implements IEncabezadoDAO {
 
  @PersistenceContext
     private EntityManager em;
