@@ -1,11 +1,6 @@
 package com.example.primerapractica.Models.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -20,6 +15,7 @@ public class Detalle implements Serializable {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "encabezado_id")
     private Encabezado encabezado;
 
     @ManyToOne

@@ -8,7 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class DetalleDaoImp implements DetalleDao {
+public class DetalleDaoImp implements IDetalleDao {
 
      @PersistenceContext
     private EntityManager em;
@@ -19,6 +19,13 @@ public class DetalleDaoImp implements DetalleDao {
     @Override
     public List<Detalle> findAll() {
         return em.createQuery("from Detalle").getResultList();
+    }
+
+    @Override
+    public List<Detalle> findAll(Long id) {
+        return em.createQuery("from Detalle where encabezado.id = :id", Detalle.class)
+                .setParameter("id", id)
+                .getResultList();
     }
 
     @Transactional

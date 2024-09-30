@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.example.primerapractica.Models.Entity.Encabezado;
 
-public interface EncabezadoDAO {
+public interface IEncabezadoDAO {
 
-      public List<Encabezado> findAll();
+    public List<Encabezado> findAll();
 
     public void Save(Encabezado encabezado);
 
