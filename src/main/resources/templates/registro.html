@@ -58,25 +58,28 @@
             <form th:action="@{/login/validar/registro}" th:object="${cliente}" method="post">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Introduce tu nombre" th:errorclass="is-invalid">
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
+                           th:errorclass="is-invalid">
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="Introduce tu apellido" th:errorclass="is-invalid">
+                    <input type="text" th:field="*{apellido}" class="form-control" id="apellido"
+                           th:errorclass="is-invalid">
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Introduce tu email" th:errorclass="is-invalid">
+                    <input type="email" th:field="*{email}" class="form-control" id="email"
+                           th:errorclass="is-invalid">
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Introduce tu contraseña" th:errorclass="is-invalid">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <div class="mb-3"></div>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" th:field="*{password}" class="form-control" id="password"
+                           th:errorclass="is-invalid">
+             <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                 </div>
-                <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Registrarse</button>
                 </div>
             </form>

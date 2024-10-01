@@ -50,7 +50,7 @@ public class LoginController {
                 result.rejectValue("email", "error.cliente", "El correo electrónico ya está en uso.");
                 model.addAttribute("mensajeError", "El correo electrónico ya está en uso.");
             } else
-                model.addAttribute("titulo", "Formulario de Cliente");
+                model.addAttribute("titulo", "Registro exitoso");
             model.addAttribute("err", result.getModel());
             return returnPage;
         }
