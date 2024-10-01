@@ -6,9 +6,9 @@ import com.example.primerapractica.Models.Entity.Encabezado;
 import org.springframework.stereotype.Repository;
 
 
-public interface EncabezadoDAO {
+public interface IEncabezadoDAO {
 
-      public List<Encabezado> findAll();
+    public List<Encabezado> findAll();
 
     public void save(Encabezado encabezado);
 

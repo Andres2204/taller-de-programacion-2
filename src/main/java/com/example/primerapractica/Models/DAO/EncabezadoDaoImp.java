@@ -9,7 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class EncabezadoDaoImp implements EncabezadoDAO {
+public class EncabezadoDaoImp implements IEncabezadoDAO {
 
  @PersistenceContext
     private EntityManager em;

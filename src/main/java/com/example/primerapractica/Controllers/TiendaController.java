@@ -1,8 +1,8 @@
 package com.example.primerapractica.Controllers;
 
-import com.example.primerapractica.Models.DAO.DetalleDao;
-import com.example.primerapractica.Models.DAO.EncabezadoDAO;
 import com.example.primerapractica.Models.DAO.IClienteDao;
+import com.example.primerapractica.Models.DAO.IDetalleDao;
+import com.example.primerapractica.Models.DAO.IEncabezadoDAO;
 import com.example.primerapractica.Models.DAO.IProductoDao;
 import com.example.primerapractica.Models.Entity.Cliente;
 import com.example.primerapractica.Models.Entity.Detalle;
@@ -22,9 +22,9 @@ public class TiendaController {
     @Autowired
     private IProductoDao productoDao;
     @Autowired
-    private DetalleDao detalleDao;
+    private IDetalleDao detalleDao;
     @Autowired
-    private EncabezadoDAO encabezadoDAO;
+    private IEncabezadoDAO encabezadoDAO;
     @Autowired
     private IClienteDao clienteDao;
 
