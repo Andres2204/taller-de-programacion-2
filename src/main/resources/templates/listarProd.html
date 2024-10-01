@@ -31,10 +31,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Inicio</a>
+                        <a class="nav-link" href="/home">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/productos}">Productos</a>
+                        <a class="nav-link active" href="/productos">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/clientes">Clientes</a>
@@ -43,7 +43,6 @@
             </div>
         </div>
     </nav>
-
     <div class="content container my-5">
         <h1 class="mb-4 text-primary" th:text="${titulo}"></h1>
 

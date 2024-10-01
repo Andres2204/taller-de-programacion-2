@@ -41,6 +41,12 @@ public class Cliente implements Serializable {
 
     
 
+    public Cliente(String s) {
+        Nombre = "nombre";
+        Apellido = "apellido";
+        perPersist();
+    }
+
     public Cliente() {
         perPersist();
     }
@@ -76,8 +82,6 @@ public class Cliente implements Serializable {
     public void setNombre(String nombre) {
         Nombre = nombre;
     }
-
-   
 
     public String getApellido() {
         return Apellido;

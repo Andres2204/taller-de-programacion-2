@@ -22,27 +22,27 @@
     </style>
 </head>
 <body class="bg-light">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-        <a class="navbar-brand" href="/">Gestión de Facturas</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/productos">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/facturas">Facturas</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Gestión de Productos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/clientes">Clientes</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 <div class="content container my-5">
     <h1 class="mb-4 text-primary" th:text="${titulo}"></h1>
