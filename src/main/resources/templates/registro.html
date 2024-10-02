@@ -69,7 +69,7 @@
             </div>
 
             
-            <form th:action="@{/validar/registro/registro}" th:object="${cliente}" method="post">
+            <form th:action="@{/registro/validar/registro}" th:object="${cliente}" method="post">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Introduce tu nombre" >

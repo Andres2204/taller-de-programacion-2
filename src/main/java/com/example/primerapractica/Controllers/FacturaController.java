@@ -35,9 +35,6 @@ public class FacturaController {
     private IDetalleDao detalleDao;
 
     @Autowired
-    private IProductoDao productoDao;
-
-    @Autowired
     private PDFbean pdfService;
 
     @GetMapping("/{id}")

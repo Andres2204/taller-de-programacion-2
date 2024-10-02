@@ -1,6 +1,7 @@
 package com.example.primerapractica.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,7 @@ public class LoginController {
         return "registro";
     }
 
-    @PostMapping("/validar/registro/{returnPage}") 
+    @PostMapping("/registro/validar/{returnPage}") 
  
     public String validarCliente(
             @Valid Cliente cliente,
@@ -57,7 +58,6 @@ public class LoginController {
         }
         cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
         clienteDao.Save(cliente);
-
         return "redirect:/";
     }
 }

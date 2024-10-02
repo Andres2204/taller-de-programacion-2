@@ -11,16 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteDetailService implements UserDetailsService {
 
-    // TODO: crear un clienteCreds
 
     @Autowired
     private IClienteDao repository;
-
-    // TODO: CAMBIAR NOMBRE POR EMAIL
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Cliente user = repository.findByEmail(email);
         if (user != null) {
+            System.out.println("2--------------");   
             return User.builder()
                     .username(user.getEmail())
                     .password(user.getPassword())
