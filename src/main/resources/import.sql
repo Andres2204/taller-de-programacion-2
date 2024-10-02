@@ -1,5 +1,5 @@
 INSERT INTO clientes (nombre, apellido, email, create_at, password) VALUES ('Fulanito', 'Calle', 'a@a.com', '2023-12-20','$2a$12$eaU.tkPnOfAXkLSiprckd.GDjp/oKRSZM5HsPbLWOcM4aOM1Nr6F6');
-INSERT INTO clientes (nombre, apellido, email, create_at, password) VALUES ('Pepito', 'Perez', 'pp@g.co', '2023-03-05','12345678');
+INSERT INTO clientes (nombre, apellido, email, create_at, password) VALUES ('Pepito', 'Perez', 'pp@g.co', '2023-03-05','$2a$12$AiW7iMD7gfg4o35sMIVXRudxEdF/Kr6wyY9pP37nCvxMft/4XjxEm');
 
 INSERT INTO productos (STOCK, VALOR_UNITARIO, DESCRIPCION, NOMBRE) VALUES (10, 1000, 'Descripcion del Producto A', 'Producto A');
 INSERT INTO productos (STOCK, VALOR_UNITARIO, DESCRIPCION, NOMBRE) VALUES (20, 2000, 'Descripcion del Producto B', 'Producto B');

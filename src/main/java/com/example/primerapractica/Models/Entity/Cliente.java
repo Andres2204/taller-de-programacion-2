@@ -3,8 +3,6 @@ package com.example.primerapractica.Models.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
