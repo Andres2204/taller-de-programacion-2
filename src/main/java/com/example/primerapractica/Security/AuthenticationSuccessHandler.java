@@ -18,7 +18,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         if (isAdmin) {
             setDefaultTargetUrl("/clientes");
         } else {
-            setDefaultTargetUrl("/home");
+            setDefaultTargetUrl("/tienda");
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }

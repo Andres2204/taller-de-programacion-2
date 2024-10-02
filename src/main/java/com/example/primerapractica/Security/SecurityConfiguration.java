@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/home", "/login/","/register/**").permitAll();
-                    registry.requestMatchers("/admin/**", "/clientes", "/productos").hasRole("ADMIN");
+                    registry.requestMatchers("/admin/**", "/clientes", "/productos").hasRole("USER");
                     registry.requestMatchers("/tienda/","/tienda/**").hasRole("USER");
                     registry.requestMatchers("/", "/login/","/register/**", "/css/**", "/js/**").permitAll();
                     registry.anyRequest().authenticated();
@@ -41,21 +41,6 @@ public class SecurityConfiguration {
                 })
                 .build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails normalUser = User.builder()
-//                .username("gc")
-//                .password("$2a$12$pLlEDlW7J3LJMLMl0Uv8Xu.NO1TYDvrMmIpoDhpHZ3So65XlsR.Vy")
-//                .roles("USER")
-//                .build();
-//        UserDetails adminUser = User.builder()
-//                .username("admin")
-//                .password("$2a$12$4MVGfzHJ2C370at3MTGHdeX6z/kon2X5KbVWZTGfqjWBhj.KnQBuC")
-//                .roles("ADMIN", "USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(normalUser, adminUser);
-//    }
 
     @Bean
     public UserDetailsService userDetailsService() {

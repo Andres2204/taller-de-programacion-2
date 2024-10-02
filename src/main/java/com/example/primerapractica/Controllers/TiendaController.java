@@ -4,11 +4,11 @@ import com.example.primerapractica.Models.DAO.IClienteDao;
 import com.example.primerapractica.Models.DAO.IDetalleDao;
 import com.example.primerapractica.Models.DAO.IEncabezadoDAO;
 import com.example.primerapractica.Models.DAO.IProductoDao;
-import com.example.primerapractica.Models.Entity.Cliente;
-import com.example.primerapractica.Models.Entity.Detalle;
-import com.example.primerapractica.Models.Entity.Encabezado;
-import com.example.primerapractica.Models.Entity.Producto;
+import com.example.primerapractica.Models.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,32 +37,37 @@ public class TiendaController {
 
     @GetMapping("")
     public String tienda(Model m) {
-        List<Producto> p = productoDao.findAll();
+        Authentication auth = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        User usr = (User) auth.getPrincipal();
+        Cliente c = clienteDao.findByEmail(usr.getUsername());
 
+        List<Producto> p = productoDao.findAll();
         m.addAttribute("productos", p);
 
-        // TODO: ponerlo con el usuario de la autenticacion.
-        Cliente c = clienteDao.findOne(1L);
+        int cartCount = 0;
         Encabezado e = encabezadoDAO.findOne(c.getId());
+        if (e != null) cartCount = detalleDao.findAll(e.getId()).size();
 
-        //TODO: quitar el atributo del model uid cuando este la autenticacion.
-
-        m.addAttribute("cartCount", detalleDao.findAll(e.getId()).size());
-        m.addAttribute("uid", 1L);
-
+        m.addAttribute("cartCount", cartCount);
         return "tienda/tienda";
     }
 
     // TODO: Cambiar metodo y ruta a una mas apropiada
-    @GetMapping("/cart/{id_usr}/{id_producto}")
-    public String cart(Model m, @PathVariable("id_usr") Long id_u, @PathVariable("id_producto") Long id_p) {
+    @GetMapping("/cart/{id_producto}")
+    public String cart(Model m , @PathVariable("id_producto") Long id_p) {
 
-        // guardar en el carrito
-        System.out.println("\n\n\nId card = " + id_p + "\n\n\n");
+        Authentication auth = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        User usr = (User) auth.getPrincipal();
+        Cliente c;
 
         // verificar si hay un cliente y poducto con stock > 0
-        Cliente c = clienteDao.findOne(id_u);
+        c = clienteDao.findByEmail(usr.getUsername());
         Producto p = productoDao.findOne(id_p);
+        Long id_u = c.getId();
 
         if (c==null || p==null) {
             m.addAttribute("error", "no existe el usuario o un producto asociado");
@@ -90,18 +95,18 @@ public class TiendaController {
         return "redirect:/tienda#"+id_p;
     }
 
-
     // TODO: restar cuando se compre
-    // Todo: controlar user con la autenticacion
     // Todo: cambiar el formato en el que se envia la informacion o enviar mas para tener una vista mas completa
     @GetMapping("cart")
     public String cart(Model m) {
+        Authentication auth = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        User usr = (User) auth.getPrincipal();
+        Cliente c = clienteDao.findByEmail(usr.getUsername());
+        m.addAttribute("uid", c.getId());
 
-        m.addAttribute("uid", 1L);
-
-        Cliente c = clienteDao.findOne(1L);
         Encabezado e = encabezadoDAO.findOne(c.getId());
-
         m.addAttribute("encabezado", e);
         m.addAttribute("dettalles", detalleDao.findAll(e.getId()));
 
