@@ -81,8 +81,9 @@ public class TiendaController {
                 encabezadoDAO.save(e);
             } else e.setTotal(e.getTotal()+p.getValorUnitario()); // sino aumentar el total.
 
-            Detalle d = new Detalle(e, p, 1, p.getValorUnitario(), 1);
             encabezadoDAO.save(e);
+
+            Detalle d = new Detalle(e, p, 1, p.getValorUnitario(), 1);
             detalleDao.save(d);
         }
 
