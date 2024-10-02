@@ -46,10 +46,17 @@ public class Encabezado implements Serializable {
     @PositiveOrZero(message = "{PositiveOrZero.encabezado.descuentoTotal}")
     private double descuentoTotal;
 
+    public Encabezado(Cliente cliente, Date fecha, double subtotal, double total, double descuentoTotal) {
+        this.cliente = cliente;
+        this.fecha = fecha;
+        this.subtotal = subtotal;
+        this.total = total;
+        this.descuentoTotal = descuentoTotal;
+    }
+
     public Encabezado() {
         perPersist();
     }
-
 
     @PrePersist
     private void perPersist() {
