@@ -23,6 +23,7 @@ public class TiendaController {
     /*
         TODO: poner la tienda estilo amazon, es decir, cuando se de click en un producto llevarlo a la pagina del producto.
         De esta manera no se tiene que hacer una peticion para volver a la tienda de manera simulada.
+        TODO: tener mayor precaucion con los stock de los productos para su interaccion antes de la compra
     */
 
     @Autowired

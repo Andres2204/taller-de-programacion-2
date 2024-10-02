@@ -5,19 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Cliente</title>
-    <!-- Bootstrap CSS -->
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            min-height: 100vh;
+        body, html {
+            min-height: 100%;
+            height: 100%;
+            margin: 0;
             display: flex;
             flex-direction: column;
         }
+        body {
+            
+            flex: 1;
+        }
         .content {
-            flex: 1 0 auto;
+          
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .footer {
+            
             flex-shrink: 0;
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0;
         }
     </style>
 </head>
@@ -26,26 +41,25 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="/">Gestión de Clientes</a>
-          
+            <a class="navbar-brand" href="/">Registro de Clientes</a>
+           
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-      
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                 
+                   
                 </ul>
             </div>
         </div>
     </nav>
 
-   
-    <div class="content container d-flex justify-content-center align-items-center my-5">
+
+    <div class="content container d-flex justify-content-center align-items-center">
         <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px;">
             <h1 class="text-center mb-4 text-primary" th:text="${titulo}">Registro de Cliente</h1>
 
-          
+            
             <div th:object="${cliente}" class="mb-3">
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <ul class="mb-0">
@@ -54,41 +68,39 @@
                 </div>
             </div>
 
-          
-            <form th:action="@{/login/validar/registro}" th:object="${cliente}" method="post">
+            
+            <form th:action="@{/registro/validar/registro}" th:object="${cliente}" method="post">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Introduce tu nombre" th:errorclass="is-invalid">
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Introduce tu nombre" >
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="Introduce tu apellido" th:errorclass="is-invalid">
+                    <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="Introduce tu apellido" >
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Introduce tu email" th:errorclass="is-invalid">
+                    <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Introduce tu email" >
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Introduce tu contraseña" th:errorclass="is-invalid">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Introduce tu contraseña" >
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Registrarse</button>
                 </div>
             </form>
 
-         
+           
             <div class="text-center mt-4">
-                <p>¿Ya tienes una cuenta? <a th:href="@{/login}" class="text-primary">Inicia sesión aquí</a></p>
+                <p>¿Ya tienes una cuenta? <a th:href="@{/}" class="text-primary">Inicia sesión aquí</a></p>
             </div>
         </div>
     </div>
 
-   
     <footer class="footer bg-dark text-light py-3 mt-auto">
         <div class="container text-center">
             <p class="mb-0">&copy; 2024 Taller de Programación 2</p>

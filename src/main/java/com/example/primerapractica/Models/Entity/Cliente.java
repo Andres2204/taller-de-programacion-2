@@ -3,8 +3,6 @@ package com.example.primerapractica.Models.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,18 +10,18 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long Id;
 
-    @NotEmpty(message = "{NotEmpty.cliente.Nombre}") //que es requerido u obligatorio
+    @NotEmpty(message = "{NotEmpty.cliente.Nombre}") // que es requerido u obligatorio
     public String Nombre;
 
     @NotEmpty(message = "{NotEmpty.cliente.Apellido}")
-    @Size(min=4, max=15, message = "{Size.cliente.Apellido}")
+    @Size(min = 4, max = 15, message = "{Size.cliente.Apellido}")
     public String Apellido;
 
     @NotEmpty(message = "{NotEmpty.cliente.Email}")
@@ -34,19 +32,23 @@ public class Cliente implements Serializable {
     @NotEmpty(message = "{password.cliente.password}")
     public String password;
 
-    @NotNull //valida que la fecha no sea nula
+    @NotNull // valida que la fecha no sea nula
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     public Date CreateAt;
 
-    
+    public Cliente(String s) {
+        Nombre = "nombre";
+        Apellido = "apellido";
+        perPersist();
+    }
 
     public Cliente() {
         perPersist();
     }
 
     @PrePersist
-    private void perPersist(){
+    private void perPersist() {
         CreateAt = new Date();
     }
 
@@ -76,8 +78,6 @@ public class Cliente implements Serializable {
     public void setNombre(String nombre) {
         Nombre = nombre;
     }
-
-   
 
     public String getApellido() {
         return Apellido;

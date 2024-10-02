@@ -1,7 +1,6 @@
 package com.example.primerapractica.Models.Entity;
 
 import com.example.primerapractica.Models.DAO.IClienteDao;
-import com.example.primerapractica.Models.Entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,28 +8,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ClienteDetailService implements UserDetailsService {
 
-    // TODO: crear un clienteCreds
 
     @Autowired
     private IClienteDao repository;
-
-    // TODO: CAMBIAR NOMBRE POR EMAIL
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Cliente user = repository.findByEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Cliente user = repository.findByEmail(email);
         if (user != null) {
+            System.out.println("2--------------");   
             return User.builder()
-                    .username(user.getNombre())
+                    .username(user.getEmail())
                     .password(user.getPassword())
                     .roles(getRoles(user))
                     .build();
         } else {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
     }
 
