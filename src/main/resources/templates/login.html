@@ -78,7 +78,7 @@
             </div>
 
             
-            <form th:action="@{/validar/login}" th:object="${cliente}" method="post">
+            <form th:action="@{/login}" th:object="${cliente}" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="text" id="email" th:field="*{Email}" class="form-control" placeholder="Introduce tu email" required>

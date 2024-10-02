@@ -2,6 +2,8 @@ package com.example.primerapractica.Models.DAO;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,7 @@ public class ClienteDaoImp implements IClienteDao {
 
     @PersistenceContext
     private EntityManager em;
-
+     
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     @Override
@@ -26,19 +28,20 @@ public class ClienteDaoImp implements IClienteDao {
     @Transactional
     @Override
     public void Save(Cliente cliente) {
-
+   
         System.out.println(cliente.toString());
 
         // actualiza
         if(cliente.getId() != null && cliente.getId()>0){
 
             System.out.println("\n\n\n ENCONTRADO - ACTUALIZAR \n\n\n");
+           
             em.merge(cliente);
         }
         else{ // crear nuevo
 
             System.out.println("\n\n\n no encontrad - Crear \n\n\n");
-            
+           
             em.merge(cliente);
            //em.persist(cliente);
         }
