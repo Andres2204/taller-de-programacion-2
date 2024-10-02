@@ -22,29 +22,21 @@
     </style>
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="/">Gestión de Productos</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand text-warning" href="/">Tienda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/productos">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/clientes">Clientes</a>
-                    </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 </ul>
             </div>
         </div>
     </nav>
 
-<div class="content container my-5">
+<!-- <div class="content container my-5">
     <h1 class="mb-4 text-primary" th:text="${titulo}"></h1>
     <div class="card shadow-sm mb-4">
         <div class="card-body">
@@ -109,7 +101,82 @@
     <div class="text-center mt-4">
             <button type="submit" id="printBtn" class="btn btn-primary">Descargar factura</button>
     </div>
+</div> -->
+<div class="content container my-5">
+    <!-- Título principal en negro -->
+    <h1 class="mb-4 text-dark border-bottom border-warning pb-3" th:text="${titulo}"></h1>
+
+    <!-- Card con fondo blanco y texto negro -->
+    <div class="card border-0 shadow mb-4 bg-white text-dark rounded">
+        <div class="card-body">
+            <div class="row">
+                <!-- Sección de Información de la Factura -->
+                <div class="col-md-6">
+                    <h3 class="mb-3 text-dark border-bottom border-warning pb-2">Información de la Factura</h3>
+                    <p><strong>Fecha:</strong> <span th:text="${encabezado.getFecha()}"></span></p>
+                </div>
+                <!-- Sección de Información del Cliente -->
+                <div class="col-md-6">
+                    <h3 class="mb-3 text-dark border-bottom border-warning pb-2">Información del Cliente</h3>
+                    <p><strong>Nombre completo:</strong> <span
+                            th:text="${encabezado.cliente.getNombre() + ' ' + encabezado.getCliente().getApellido()}"></span>
+                    </p>
+                    <p><strong>Cédula:</strong> <span th:text="${encabezado.getCliente().getId()}"></span></p>
+                    <p><strong>Correo:</strong> <span th:text="${encabezado.getCliente().getEmail()}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Título de Detalles de la Factura en negro -->
+    <h3 class="mb-4 text-dark">Detalles de la Factura</h3>
+
+    <!-- Tabla con fondo blanco y texto negro -->
+    <div class="table-responsive">
+        <table class="table table-hover border rounded">
+            <thead class="bg-light text-dark">
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Descuento</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody class="table-light">
+                <tr th:each="detalle : ${detalles}">
+                    <td th:text="${detalle.producto.getNombre()}"></td>
+                    <td th:text="${detalle.producto.getDescripcion()}"></td>
+                    <td th:text="${detalle.cantidad}"></td>
+                    <td>$<span th:text="${detalle.producto.getValorUnitario()}"></span></td>
+                    <td>$<span th:text="${detalle.getDescuento()}"></span></td>
+                    <td>$<span th:text="${detalle.cantidad * detalle.producto.getValorUnitario() - detalle.getDescuento()}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Card con resumen de factura con fondo blanco y texto negro -->
+    <div class="card border-0 shadow mt-4 bg-white text-dark rounded">
+        <div class="card-body">
+            <h3 class="mb-3 text-dark border-bottom border-warning pb-2">Resumen de la Factura</h3>
+            <div class="row">
+                <div class="col-md-6 offset-md-6">
+                    <p><strong>SubTotal:</strong> $<span th:text="${encabezado.getSubtotal()}"></span></p>
+                    <p><strong>Descuento Total:</strong> $<span th:text="${encabezado.getDescuentoTotal()}"></span></p>
+                    <h4><strong>Total:</strong> $<span th:text="${encabezado.getTotal()}"></span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón centrado con texto negro sobre fondo amarillo -->
+    <div class="text-center mt-4">
+        <button type="submit" id="printBtn" class="btn btn-warning text-dark fw-bold rounded-pill px-5">Descargar factura</button>
+    </div>
 </div>
+
 
 <footer class="footer bg-dark text-light py-3 mt-auto">
     <div class="container text-center">
