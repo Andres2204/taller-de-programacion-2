@@ -52,7 +52,6 @@ public class TiendaController {
         return "tienda/tienda";
     }
 
-
     // TODO: Cambiar metodo y ruta a una mas apropiada
     @GetMapping("/cart/{id_usr}/{id_producto}")
     public String cart(Model m, @PathVariable("id_usr") Long id_u, @PathVariable("id_producto") Long id_p) {
