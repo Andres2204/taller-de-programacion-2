@@ -29,19 +29,16 @@ public class Detalle implements Serializable {
     @Positive(message = "{Positive.Detalle.valor}")
     private double valor;
 
-    @NotNull(message = "{NotEmpty.Detalle.descuento}")
-    @PositiveOrZero(message = "{PositiveOrZero.Detalle.descuento}")
-    private double descuento;
+
 
     public Detalle() {
     }
 
-    public Detalle(Encabezado encabezado, Producto producto, int cantidad, double valor, double descuento) {
+    public Detalle(Encabezado encabezado, Producto producto, int cantidad, double valor) {
         this.encabezado = encabezado;
         this.producto = producto;
         this.cantidad = cantidad;
         this.valor = valor;
-        this.descuento = descuento;
     }
 
     public Encabezado getEncabezado() {
@@ -76,13 +73,6 @@ public class Detalle implements Serializable {
         this.valor = valor;
     }
 
-    public double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
-    }
 
     public Long getId() {
         return id;

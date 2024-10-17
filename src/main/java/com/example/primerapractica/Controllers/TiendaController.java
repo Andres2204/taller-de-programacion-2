@@ -4,7 +4,10 @@ import com.example.primerapractica.Models.DAO.IClienteDao;
 import com.example.primerapractica.Models.DAO.IDetalleDao;
 import com.example.primerapractica.Models.DAO.IEncabezadoDAO;
 import com.example.primerapractica.Models.DAO.IProductoDao;
-import com.example.primerapractica.Models.Entity.*;
+import com.example.primerapractica.Models.Entity.Cliente;
+import com.example.primerapractica.Models.Entity.Detalle;
+import com.example.primerapractica.Models.Entity.Encabezado;
+import com.example.primerapractica.Models.Entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,15 +47,24 @@ public class TiendaController {
         Cliente c = clienteDao.findByEmail(usr.getUsername());
 
         List<Producto> p = productoDao.findAll();
+
         m.addAttribute("productos", p);
 
         int cartCount = 0;
         Encabezado e = encabezadoDAO.findOne(c.getId());
-        if (e != null) cartCount = detalleDao.findAll(e.getId()).size();
+        int detalle = 0;
+        if (e != null){
+             detalle = detalleDao.findAll(e.getId()).size();
+            cartCount = detalleDao.findAll(e.getId()).size();
+        }
+
+        //TODO: quitar el atributo del model uid cuando este la autenticacion.
+        if (e != null)
 
         m.addAttribute("cartCount", cartCount);
         return "tienda/tienda";
     }
+
 
     // TODO: Cambiar metodo y ruta a una mas apropiada
     @GetMapping("/cart/{id_producto}")
@@ -88,14 +100,27 @@ public class TiendaController {
 
             encabezadoDAO.save(e);
 
-            Detalle d = new Detalle(e, p, 1, p.getValorUnitario(), 1);
+            Detalle d = new Detalle(e, p, 1, p.getValorUnitario());
             detalleDao.save(d);
+
+            int sub = 0;
+            int total = 0;
+            for (Detalle x : detalleDao.findAll(e.getId())){
+                sub = (int) (sub + ((int) x.getCantidad() * x.getProducto().getValorUnitario()));
+                total = (int) (sub + ((int) x.getCantidad() * x.getProducto().getValorUnitario() - (x.getProducto().getValorUnitario()*x.getProducto().getDescuento())));
+            }
+            e.setTotal(total);
+            e.setSubtotal(sub);
+            e.setDescuentoTotal((100-(sub*100)/total));
+            encabezadoDAO.save(e);
         }
 
         return "redirect:/tienda#"+id_p;
     }
 
+
     // TODO: restar cuando se compre
+    // Todo: controlar user con la autenticacion
     // Todo: cambiar el formato en el que se envia la informacion o enviar mas para tener una vista mas completa
     @GetMapping("cart")
     public String cart(Model m) {
@@ -105,8 +130,8 @@ public class TiendaController {
         User usr = (User) auth.getPrincipal();
         Cliente c = clienteDao.findByEmail(usr.getUsername());
         m.addAttribute("uid", c.getId());
-
         Encabezado e = encabezadoDAO.findOne(c.getId());
+
         m.addAttribute("encabezado", e);
         m.addAttribute("dettalles", detalleDao.findAll(e.getId()));
 

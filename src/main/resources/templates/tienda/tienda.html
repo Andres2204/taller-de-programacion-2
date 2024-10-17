@@ -26,14 +26,13 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             </ul>
             <span class="pr-4" sec:authentication="name">Bob</span>
-            <form class="d-flex">
-                <a th:href="@{/tienda/cart}">
-                    <button class="btn btn-outline-dark" type="submit">
+            <form class="d-flex" onsubmit="window.location.href='/tienda/cart'; return false;">
+
+                    <button class="btn btn-outline-dark" type="submit" >
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cartCount}">0</span>
                     </button>
-                </a>
             </form>
         </div>
     </div>
@@ -48,14 +47,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             </ul>
-            <form class="d-flex">
-                <a th:href="@{/tienda/cart}">
+            <form class="d-flex" onsubmit="window.location.href='/tienda/cart'; return false;">
+
                     <button class="btn btn-outline-warning" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span class="badge bg-warning text-dark ms-1 rounded-pill" th:text="${cartCount}">0</span>
                     </button>
-                </a>
+
             </form>
         </div>
     </div>

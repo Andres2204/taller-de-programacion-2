@@ -25,13 +25,30 @@ public class Producto implements Serializable {
     @NotNull(message = "{NotEmpty.producto.ValorUnitario}") 
     @Positive(message = "{Positive.producto.ValorUnitario}") 
     private int ValorUnitario;
-    
+
+    @NotNull(message = "{NotEmpty.Detalle.descuento}")
+    @PositiveOrZero(message = "{PositiveOrZero.Detalle.descuento}")
+    private double descuento;
     
     @NotNull(message = "{NotEmpty.producto.Stock}")
     @PositiveOrZero(message = "{PositiveOrZero.producto.Stock}")
     private int Stock;
 
     public Producto() {
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    @NotNull(message = "{NotEmpty.Detalle.descuento}")
+    @PositiveOrZero(message = "{PositiveOrZero.Detalle.descuento}")
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(@NotNull(message = "{NotEmpty.Detalle.descuento}") @PositiveOrZero(message = "{PositiveOrZero.Detalle.descuento}") double descuento) {
+        this.descuento = descuento;
     }
 
     public Long getId() {
